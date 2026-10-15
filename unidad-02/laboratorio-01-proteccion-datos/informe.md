@@ -112,3 +112,58 @@ Script: [sql/03-seudonimizacion.sql](sql/03-seudonimizacion.sql) · Evidencias: 
 5. **¿Cómo se verificó?** Consultando los permisos del rol y actuando como analista con SET ROLE: la consulta a analitica.clientes funcionó y las otras dos fueron rechazadas, la de pii.mapa_cliente porque analista no tiene permiso sobre el esquema pii y la de public.clientes porque no tiene permiso sobre la tabla. Después, como postgres, se comprobó que solo uniendo el mapa con clientes se llega al nombre de cada cliente.
 6. **¿Qué evidencia demuestra el resultado?** Las capturas 4.1 a 4.4 del archivo evidencias/03-seudonimizacion.pdf.
 7. **¿Qué conclusión se obtiene?** Que la seudonimización solo protege si el mapa y el conjunto de datos están separados y los consultan roles distintos. Con estos permisos analítica puede hacer su trabajo sin poder saber quién es cada cliente.
+
+## 5. Anonimización
+
+Script: [sql/04-anonimizacion.sql](sql/04-anonimizacion.sql) · Evidencias: [evidencias/04-anonimizacion.pdf](evidencias/04-anonimizacion.pdf)
+
+### 5.1 Identificadores eliminados, atributos generalizados y grupos suprimidos
+
+Las consultas no muestran ningún identificador directo: no aparecen el nombre, el correo, el teléfono ni el RFC, y tampoco el id. Solo muestran cuántos clientes hay en cada grupo.
+
+Se generalizaron dos atributos: la edad, que se cambió por rangos (18-30, 31-45 y 46+), y el código postal, del que solo se dejaron los dos primeros dígitos como región. Al combinarlos quedaron tres grupos: uno de 3 clientes (31-45 en la región 80) y dos de un solo cliente (31-45 en la región 81 y 46+ en la región 82).
+
+Con el umbral de k = 5 se suprimieron los tres grupos, porque ninguno llegaba a cinco clientes, y la consulta 12.4 no devolvió ninguna fila.
+
+El riesgo de reidentificación no desaparece. Antes de suprimir, los grupos de un solo cliente señalaban a una persona. Además, con tan pocos registros, quien conozca a los clientes por otro medio podría deducir quién está en cada grupo, y si se agregan otros atributos, como la ciudad o la fecha de alta, los grupos vuelven a hacerse más pequeños.
+
+### 5.2 Resumen de la actividad
+
+1. **¿Cuál era el problema?** La dirección necesita información estadística de los clientes, pero no necesita conocerlos uno por uno.
+2. **¿Qué riesgo o necesidad se identificó?** Que aun sin nombre, correo, teléfono ni RFC se pudiera reconocer a un cliente por su edad y su código postal, sobre todo en los grupos con muy pocos registros.
+3. **¿Qué decisión se tomó?** Mostrar solo totales por grupo, generalizar la edad y el código postal, y suprimir los grupos con menos de cinco clientes.
+4. **¿Qué configuración o implementación se realizó?** Cuatro consultas: CASE para los rangos de edad, LEFT para la región, GROUP BY para agrupar y HAVING para suprimir los grupos pequeños. Están en sql/04-anonimizacion.sql.
+5. **¿Cómo se verificó?** Comparando los resultados de cada consulta: al combinar edad y región quedaron grupos de 3, 1 y 1 clientes, y con el umbral de cinco la consulta no devolvió ningún grupo.
+6. **¿Qué evidencia demuestra el resultado?** Las capturas 5.1 a 5.4 del archivo evidencias/04-anonimizacion.pdf.
+7. **¿Qué conclusión se obtiene?** Que generalizar ayuda, pero con pocos registros no basta: si los grupos son muy pequeños hay que suprimirlos, aunque eso deje sin información útil, como pasó aquí.
+
+## 6. Análisis del riesgo de reidentificación
+
+Script: [sql/04-anonimizacion.sql](sql/04-anonimizacion.sql) · Evidencias: [evidencias/04-anonimizacion.pdf](evidencias/04-anonimizacion.pdf)
+
+### 6.1 Preguntas
+
+1. **¿Qué identificadores directos fueron eliminados?** El nombre, el correo, el teléfono y el RFC. Tampoco se muestra el id, porque las consultas solo devuelven totales por grupo.
+2. **¿Qué cuasi-identificadores permanecen?** La edad y el código postal, aunque generalizados como rango de edad y región.
+3. **¿Qué combinaciones de atributos podrían reducir el anonimato?** La edad con el código postal, y más si se agregan la ciudad o la fecha de alta, porque entre más atributos se combinan, más pequeños quedan los grupos. En la Actividad 1 se vio que la edad, la ciudad y el código postal juntos distinguen a cada uno de los cinco clientes.
+4. **¿Qué sucede cuando un grupo contiene pocos registros?** Que la persona se puede reconocer. En la consulta 12.3 quedaron dos grupos de un solo cliente: quien sepa que alguien de más de 45 años con código postal 82 es cliente sabe que ese registro es el suyo, y cualquier dato que se publique de ese grupo es información de esa persona. Por eso esos grupos se suprimen.
+5. **¿Qué atributos deberían generalizarse?** La edad, en rangos más amplios, y el código postal, dejando menos dígitos. Si se usaran la ciudad o la fecha de alta también habría que generalizarlas, por ejemplo la ciudad por región y la fecha por año.
+6. **¿Qué información debería suprimirse?** Los identificadores directos y los grupos que no lleguen al umbral de cinco registros. Con estos datos fueron todos los grupos de la consulta 12.4.
+7. **¿Es correcto afirmar que el conjunto de datos es «100 % anónimo»? ¿Por qué?** No. Cumplir con k = 5 reduce el riesgo, pero no lo elimina: alguien que conozca a los clientes por otro medio o que cruce estos datos con otra información podría reidentificar a alguien. La guía también aclara que hay que revisar otros atributos y sus combinaciones, y entre menos registros hay, más fácil es reconocer a una persona.
+
+### 6.2 Reto
+
+- **Cambio realizado:** Se usaron rangos de edad más amplios (18-29, 30-49 y 50+), se dejó solo el primer dígito del código postal (8xxxx) y se agregó la categoría «sin dato» para edades vacías o menores de 18, que en la consulta original se contarían como 46+.
+- **Motivo:** Con los rangos y regiones de la guía ningún grupo llegaba a cinco clientes, y dos grupos tenían un solo cliente.
+- **Resultado obtenido:** Un solo grupo, 30-49 en la zona 8xxxx, con los cinco clientes, que sí cumple el umbral de k = 5. A cambio, el resultado dice menos: solo que hay cinco clientes de 30 a 49 años en la zona 8.
+- **Riesgo que se pretende reducir:** La reidentificación por la combinación de edad y código postal: ahora cada cliente se confunde con los otros cuatro.
+
+### 6.3 Resumen de la actividad
+
+1. **¿Cuál era el problema?** Aun sin los identificadores directos, había grupos tan pequeños que permitían reconocer a un cliente.
+2. **¿Qué riesgo o necesidad se identificó?** La reidentificación de un cliente por la combinación de su rango de edad y su región.
+3. **¿Qué decisión se tomó?** Generalizar más la edad y el código postal hasta que los grupos cumplieran el umbral de cinco clientes.
+4. **¿Qué configuración o implementación se realizó?** Se modificó la consulta 12.4 con rangos de edad más amplios, la zona postal de un dígito y una categoría para edades vacías. Está al final de sql/04-anonimizacion.sql.
+5. **¿Cómo se verificó?** La consulta del reto devolvió un solo grupo con los cinco clientes, que cumple el umbral.
+6. **¿Qué evidencia demuestra el resultado?** La captura 6.1 del archivo evidencias/04-anonimizacion.pdf, junto con la 5.3 y la 5.4, que muestran el problema.
+7. **¿Qué conclusión se obtiene?** Que hay que equilibrar privacidad y utilidad: entre más se generaliza menos riesgo hay, pero también se pierde detalle, y ningún umbral garantiza por sí solo que los datos sean 100 % anónimos.
