@@ -44,3 +44,28 @@ Todos los campos de la tabla requieren protección pero no al mismo nivel. El no
 5. **¿Cómo se verificó?** Contando los valores distintos de cada campo y agrupando por edad, ciudad y código postal. Cada combinación salió una sola vez.
 6. **¿Qué evidencia demuestra el resultado?** Las capturas del punto 1.1 al 1.5 del archivo evidencias/01-clasificacion.pdf.
 7. **¿Qué conclusión se obtiene?** Que quitar el nombre no basta para proteger a una persona porque varios datos que parecen inofensivos también la identifican si se juntan. Por eso en las siguientes actividades se aplican enmascaramiento, seudonimización, anonimización y una regla de retención.
+
+## 2. Enmascaramiento
+
+Script: [sql/02-enmascaramiento.sql](sql/02-enmascaramiento.sql) · Evidencias: [evidencias/02-enmascaramiento.pdf](evidencias/02-enmascaramiento.pdf)
+
+### 2.1 Preguntas
+
+1. **¿Qué información continúa existiendo en la tabla original?** Toda, la vista no cambia ni borra nada, la tabla clientes sigue guardando el nombre, correo, teléfono y RFC completos. Lo único que cambia es lo que muestra al consultar la vista.
+2. **¿Qué información puede visualizar el usuario soporte?** Solo lo que muestra la vista: el id y el nombre completos, las dos primeras letras del correo con su dominio, los últimos cuatro dígitos del teléfono y los últimos cuatro caracteres del RFC. La edad, la ciudad, el código postal y la fecha de alta no los ve porque la vista no los incluye.
+3. **¿Por qué no es suficiente ocultar los datos únicamente en la aplicación?** Porque en la base los datos seguirían completos y cualquie persona que la consulte por otro medio, como psql, u otra aplicación, los vería sin ocultar. Si se ocultan en la base con una vista y permisos, la protección aplica sin importar desde dónde se consulte.
+4. **¿Qué ocurriría si soporte tuviera acceso directo a clientes?** Podría consultar la tabla y ver todos los datos completos, y la vista ya no serviría de nada. Por eso se le quitaron los permisos sobre clientes, y al intentar consultarla aparece el error permission denied.
+
+### 2.2 Qué se ocultó, para quién, por qué y cómo
+
+Se ocultó parte del correo, del teléfono y del RFC de los clientes para el área de soporte. Soporte necesita identificar al cliente para atenderlo, pero no necesita ver esos datos completos, y entre menos personas los vean, menor es el riesgo de que se filtren o se usen mal. El mecanismo fue una vista, v_clientes_soporte, que muestra esos datos con asteriscos usando funciones de texto, y un rol soporte sin inicio de sesión que solo tiene permiso de leer la vista y ningún permiso sobre la tabla clientes. La vista consulta la tabla con los permisos de su dueño, por eso soporte puede usarla aunque no tenga acceso a la tabla.
+
+### 2.3 Resumen de la actividad
+
+1. **¿Cuál era el problema?** El área de soporte necesita consultar a los clientes, pero no debe ver completos su correo, teléfono y RFC.
+2. **¿Qué riesgo o necesidad se identificó?** Que soporte tuviera acceso a datos que no necesita para su trabajo y que esos datos se pudieran filtrar o usar mal.
+3. **¿Qué decisión se tomó?** Darle a soporte una vista con esos datos parcialmente ocultos y quitarle el acceso directo a la tabla.
+4. **¿Qué configuración o implementación se realizó?** Se creó el rol soporte sin inicio de sesión y la vista v_clientes_soporte, se le dio permiso de usar el esquema public y de leer la vista, y se le quitaron todos los permisos sobre clientes. Todo está en sql/02-enmascaramiento.sql.
+5. **¿Cómo se verificó?** Consultando los permisos del rol y actuando como soporte con SET ROLE: la vista mostró los datos enmascarados y la consulta a clientes fue rechazada.
+6. **¿Qué evidencia demuestra el resultado?** Las capturas 2.1 a 2.6 del archivo evidencias/02-enmascaramiento.pdf.
+7. **¿Qué conclusión se obtiene?** Que el enmascaramiento sirve si se hace en la base de datos y va junto con los permisos: la vista oculta los datos y los permisos evitan que soporte se la salte consultando la tabla directamente.
