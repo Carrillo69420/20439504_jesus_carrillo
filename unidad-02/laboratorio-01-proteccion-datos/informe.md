@@ -69,3 +69,46 @@ Se ocultó parte del correo, del teléfono y del RFC de los clientes para el ár
 5. **¿Cómo se verificó?** Consultando los permisos del rol y actuando como soporte con SET ROLE: la vista mostró los datos enmascarados y la consulta a clientes fue rechazada.
 6. **¿Qué evidencia demuestra el resultado?** Las capturas 2.1 a 2.6 del archivo evidencias/02-enmascaramiento.pdf.
 7. **¿Qué conclusión se obtiene?** Que el enmascaramiento sirve si se hace en la base de datos y va junto con los permisos: la vista oculta los datos y los permisos evitan que soporte se la salte consultando la tabla directamente.
+
+## 3. Seudonimización
+
+Script: [sql/03-seudonimizacion.sql](sql/03-seudonimizacion.sql) · Evidencias: [evidencias/03-seudonimizacion.pdf](evidencias/03-seudonimizacion.pdf)
+
+### 3.1 Tokens, mapa de correspondencia y permisos
+
+Los tokens se generaron con la función gen_random_uuid(), que crea un identificador aleatorio de 36 caracteres para cada cliente. El token no sale de ningún dato del cliente, así que viéndolo no se puede saber a quién pertenece. La guía pide habilitar la extensión pgcrypto para usarla, aunque en PostgreSQL 16 esa función ya viene incluida.
+
+La relación entre cada token y el id del cliente quedó en la tabla pii.mapa_cliente, dentro del esquema pii, separada de la tabla analitica.clientes que usa el área de analítica. Ese mapa es lo único que permite saber de quién es cada token, por eso solo debería consultarlo el personal autorizado, como el administrador de la base, y nunca el área de analítica.
+
+Los permisos se separaron porque si la misma persona pudiera ver los datos seudonimizados y el mapa, podría volver a identificar a todos los clientes y la seudonimización no serviría de nada.
+
+### 3.2 Resumen de la actividad
+
+1. **¿Cuál era el problema?** El área de analítica necesita estudiar la información de los clientes, pero no necesita saber quién es cada uno.
+2. **¿Qué riesgo o necesidad se identificó?** Que analítica trabajara con el nombre, el correo, el teléfono y el RFC de los clientes sin necesitarlos, y que esos datos se pudieran filtrar.
+3. **¿Qué decisión se tomó?** Sustituir el identificador de cada cliente por un token aleatorio y guardar la relación entre el token y el cliente en un esquema aparte.
+4. **¿Qué configuración o implementación se realizó?** Se crearon los esquemas pii y analitica, la tabla pii.mapa_cliente con un token para cada cliente y la tabla analitica.clientes con el token, la edad, la ciudad, el código postal y la fecha de alta. Todo está en sql/03-seudonimizacion.sql.
+5. **¿Cómo se verificó?** Consultando el mapa, que tiene un token distinto para cada uno de los cinco clientes, y la tabla analitica.clientes, que no tiene nombre, correo, teléfono ni RFC.
+6. **¿Qué evidencia demuestra el resultado?** Las capturas 3.1 a 3.3 del archivo evidencias/03-seudonimizacion.pdf.
+7. **¿Qué conclusión se obtiene?** Que con la seudonimización analítica puede trabajar con los datos sin ver quién es cada cliente, pero la identidad se puede recuperar con el mapa, por eso el mapa se tiene que proteger por separado.
+
+## 4. Separación de funciones
+
+Script: [sql/03-seudonimizacion.sql](sql/03-seudonimizacion.sql) · Evidencias: [evidencias/03-seudonimizacion.pdf](evidencias/03-seudonimizacion.pdf)
+
+### 4.1 Preguntas
+
+1. **¿Qué ocurriría si analista pudiera consultar también pii.mapa_cliente?** Podría saber a qué cliente pertenece cada fila de analitica.clientes, porque el mapa relaciona cada token con el id del cliente, y ese id es el que lleva a su nombre, correo, teléfono y RFC. La seudonimización ya no protegería nada.
+2. **¿Qué principio de seguridad se está aplicando al separar ambos accesos?** La separación de funciones, junto con el mínimo privilegio: cada rol tiene solo el acceso que necesita para su trabajo. Analítica tiene los datos para estudiarlos, pero no el mapa, y el mapa queda solo para quien está autorizado a volver a identificar a un cliente.
+3. **¿Por qué la seudonimización no equivale a anonimización?** Porque la identidad no se elimina, solo se guarda aparte, y con el mapa se puede volver a saber de quién es cada dato. En la anonimización ya no hay forma de saberlo. Además, en analitica.clientes siguen la edad, la ciudad y el código postal, que juntos pueden identificar a un cliente, como se vio en la Actividad 1.
+4. **¿Qué información permite volver a relacionar el token con una persona?** La tabla pii.mapa_cliente, que relaciona cada token con el id del cliente. Con ese id se encuentran sus datos completos en la tabla clientes, por eso el mapa se guardó en un esquema al que analista no tiene acceso.
+
+### 4.2 Resumen de la actividad
+
+1. **¿Cuál era el problema?** Si la misma persona puede ver los datos seudonimizados y el mapa, puede volver a identificar a los clientes.
+2. **¿Qué riesgo o necesidad se identificó?** Que el área de analítica tuviera acceso al mapa o a la tabla clientes y pudiera recuperar la identidad de los clientes.
+3. **¿Qué decisión se tomó?** Darle a analítica un rol que solo pueda leer el conjunto seudonimizado, sin acceso al mapa ni a los datos originales.
+4. **¿Qué configuración o implementación se realizó?** Se creó el rol analista sin inicio de sesión, con permiso de usar el esquema analitica y de leer analitica.clientes, y sin ningún permiso sobre pii ni sobre clientes. Está en sql/03-seudonimizacion.sql.
+5. **¿Cómo se verificó?** Consultando los permisos del rol y actuando como analista con SET ROLE: la consulta a analitica.clientes funcionó y las otras dos fueron rechazadas, la de pii.mapa_cliente porque analista no tiene permiso sobre el esquema pii y la de public.clientes porque no tiene permiso sobre la tabla. Después, como postgres, se comprobó que solo uniendo el mapa con clientes se llega al nombre de cada cliente.
+6. **¿Qué evidencia demuestra el resultado?** Las capturas 4.1 a 4.4 del archivo evidencias/03-seudonimizacion.pdf.
+7. **¿Qué conclusión se obtiene?** Que la seudonimización solo protege si el mapa y el conjunto de datos están separados y los consultan roles distintos. Con estos permisos analítica puede hacer su trabajo sin poder saber quién es cada cliente.
