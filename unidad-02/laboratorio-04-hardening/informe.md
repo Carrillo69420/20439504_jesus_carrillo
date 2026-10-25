@@ -27,7 +27,7 @@ El firewall decide antes de que la conexión llegue a PostgreSQL y solo con la d
 
 ### 5. ¿Qué diferencia existe entre autenticación y autorización?
 
-La autenticación comprueba quién se conecta; la autorización decide qué puede hacer ya adentro. En la [evidencia 04](evidencias/04-roles.png) se ven por separado: `app_comercializadora` pasa la autenticación, con SCRAM y TLS, y puede contar los clientes, pero al intentar un `DELETE`, leer `pii.mapa_cliente` o crear una tabla recibe «permission denied». Está autenticada, pero no autorizada para eso. Al revés, root ya no pasa la autenticación como `postgres` («Peer authentication failed»), así que ni siquiera llega a pedir permisos. La contraseña verifica la identidad; los privilegios deciden qué puede hacer esa identidad.
+La autenticación comprueba quién se conecta; la autorización decide qué puede hacer ya adentro. En este laboratorio se ven por separado. En la [evidencia 05](evidencias/05-tls.png), `app_comercializadora` pasa la autenticación con SCRAM y TLS; en la [evidencia 04](evidencias/04-roles.png), con sus permisos, cuenta los clientes, pero al intentar un `DELETE`, leer `pii.mapa_cliente` o crear una tabla recibe «permission denied». Está autenticada, pero no autorizada para eso. Al revés, root ya no pasa la autenticación como `postgres` («Peer authentication failed»), así que ni siquiera llega a pedir permisos. La contraseña verifica la identidad; los privilegios deciden qué puede hacer esa identidad.
 
 ### 6. ¿Por qué una cuenta de aplicación no debe ser SUPERUSER?
 
