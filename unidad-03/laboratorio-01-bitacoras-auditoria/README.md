@@ -11,6 +11,7 @@ Este README explica cómo se desplegó el servidor y qué versión tiene, como p
 | Actividad | Script | Evidencia |
 | --- | --- | --- |
 | 1. Configuración de registro por defecto | — | [01-configuracion-inicial.md](evidencias/01-configuracion-inicial.md) |
+| 2. Que el servidor administre su propia bitácora | [01-colector-y-vista.sql](sql/01-colector-y-vista.sql) | [02-colector.md](evidencias/02-colector.md) |
 
 ## Objetivo
 
