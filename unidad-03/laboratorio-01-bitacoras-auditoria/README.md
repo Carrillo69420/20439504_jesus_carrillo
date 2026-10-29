@@ -14,6 +14,11 @@ Este README explica cómo se desplegó el servidor y qué versión tiene, como p
 | 2. Que el servidor administre su propia bitácora | [01-colector-y-vista.sql](sql/01-colector-y-vista.sql) | [02-colector.md](evidencias/02-colector.md) |
 | 3. El incidente sin bitácora | — | [03-incidente-sin-bitacora.md](evidencias/03-incidente-sin-bitacora.md) |
 | 4. Configurar la bitácora | [02-configuracion-bitacora.sql](sql/02-configuracion-bitacora.sql) | [04-configuracion-bitacora.md](evidencias/04-configuracion-bitacora.md) |
+| 5. Accesos exitosos y fallidos | — | [05-accesos.md](evidencias/05-accesos.md) |
+| 6. Cambios de privilegios y de estructura | [03-privilegios-estructura.sql](sql/03-privilegios-estructura.sql) | [06-privilegios-estructura.md](evidencias/06-privilegios-estructura.md) |
+| 7. Modificaciones de datos: ddl frente a mod | — | [07-modificaciones.md](evidencias/07-modificaciones.md) |
+| 8. Errores y operaciones rechazadas | — | [08-errores.md](evidencias/08-errores.md) |
+| 9. Sesiones activas con `pg_stat_activity` | — | [09-pg-stat-activity.md](evidencias/09-pg-stat-activity.md) |
 
 ## Objetivo
 
@@ -71,4 +76,4 @@ La regla `local` se dejó en `trust`, como indica la guía. Es la de la sesión 
 - Tabla `clientes` con los cinco clientes ficticios de la Unidad II.
 - Rol `app_ventas`, la aplicación de ventas, con SELECT y UPDATE sobre `clientes`.
 - Rol `soporte_ana`, la analista de soporte, con SELECT.
-- Las contraseñas se asignaron con `\password`, para que no quedaran escritas en ninguna sentencia. Son valores de práctica de la guía y no se incluyen en este repositorio.
+- Las contraseñas se asignaron con `\password`, para que no quedaran escritas en ninguna sentencia. Son valores de práctica y no se incluyen en este repositorio.
