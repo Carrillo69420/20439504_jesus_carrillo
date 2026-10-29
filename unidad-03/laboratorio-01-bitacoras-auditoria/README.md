@@ -12,6 +12,8 @@ Este README explica cómo se desplegó el servidor y qué versión tiene, como p
 | --- | --- | --- |
 | 1. Configuración de registro por defecto | — | [01-configuracion-inicial.md](evidencias/01-configuracion-inicial.md) |
 | 2. Que el servidor administre su propia bitácora | [01-colector-y-vista.sql](sql/01-colector-y-vista.sql) | [02-colector.md](evidencias/02-colector.md) |
+| 3. El incidente sin bitácora | — | [03-incidente-sin-bitacora.md](evidencias/03-incidente-sin-bitacora.md) |
+| 4. Configurar la bitácora | [02-configuracion-bitacora.sql](sql/02-configuracion-bitacora.sql) | [04-configuracion-bitacora.md](evidencias/04-configuracion-bitacora.md) |
 
 ## Objetivo
 
