@@ -25,6 +25,8 @@ Este README explica cómo se desplegó el servidor y qué versión tiene, como p
 | 13. Altas y bajas | — | [12-altas-bajas.md](evidencias/12-altas-bajas.md) |
 | 14. Intentar manipular la auditoría | — | [13-manipulacion.md](evidencias/13-manipulacion.md) |
 | 15. Límites: lecturas y volumen | — | [14-limites.md](evidencias/14-limites.md) |
+| 16. Exportar y conservar la bitácora | — | [15-cronologia.md](evidencias/15-cronologia.md), pasos 1 a 5; [bitacora-lab01.log](evidencias/bitacora-lab01.log) y [bitacora-lab01.sha256](evidencias/bitacora-lab01.sha256) |
+| 17. Reconstruir la cronología | — | [15-cronologia.md](evidencias/15-cronologia.md), pasos 6 y 7 |
 
 ## Objetivo
 

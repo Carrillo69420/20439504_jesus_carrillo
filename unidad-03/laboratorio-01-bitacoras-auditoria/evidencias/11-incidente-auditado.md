@@ -11,7 +11,7 @@ Repetir el cambio de RFC de María García con el disparador activo y comprobar 
 
 ## Pasos y resultados
 
-El servidor se detuvo el 29 de octubre y se volvió a arrancar el 31 a las 09:42:51. Al arrancar, PostgreSQL abrió un archivo de bitácora nuevo, `postgresql-2026-10-31_094251.log`, y la vista `dba.bitacora` solo lee el archivo vigente. Los números de línea de esta evidencia son los de ese archivo, que empieza otra vez en 1. El archivo del 29 de octubre sigue en la misma carpeta y se exporta en la Actividad 16.
+El servidor se detuvo el 29 de octubre y se volvió a arrancar el 31 a las 09:42:51. Al arrancar, PostgreSQL abrió un archivo de bitácora nuevo, `postgresql-2026-10-31_094251.log`, y la vista `dba.bitacora` solo lee el archivo vigente. Los números de línea de esta evidencia son los de ese archivo, que empieza otra vez en 1. El archivo del 29 de octubre sigue en la misma carpeta y se exporta en la Actividad 16. En esa exportación van primero las 181 líneas del 29 de octubre, así que ahí cada línea de esta evidencia lleva su número más 181 ([evidencia 15](15-cronologia.md)).
 
 ### 1. La aplicación cambia el RFC
 
