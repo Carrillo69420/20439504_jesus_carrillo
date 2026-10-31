@@ -19,6 +19,8 @@ Este README explica cómo se desplegó el servidor y qué versión tiene, como p
 | 7. Modificaciones de datos: ddl frente a mod | — | [07-modificaciones.md](evidencias/07-modificaciones.md) |
 | 8. Errores y operaciones rechazadas | — | [08-errores.md](evidencias/08-errores.md) |
 | 9. Sesiones activas con `pg_stat_activity` | — | [09-pg-stat-activity.md](evidencias/09-pg-stat-activity.md) |
+| 10. Diseño del registro de auditoría | [04-esquema-auditoria.sql](sql/04-esquema-auditoria.sql) | [10-diseno-auditoria.md](evidencias/10-diseno-auditoria.md) |
+| 11. Función y disparador de auditoría | [05-funcion-disparador.sql](sql/05-funcion-disparador.sql) | [10-diseno-auditoria.md](evidencias/10-diseno-auditoria.md), segunda parte |
 
 ## Objetivo
 
