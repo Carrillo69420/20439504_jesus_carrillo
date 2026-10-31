@@ -4,7 +4,7 @@
 - Materia: Gestión de Seguridad y Desempeño de Bases de Datos
 - Unidad III, temas 3.1 Auditoría de bases de datos y 3.2 Bitácoras y trazabilidad
 - Entorno: PostgreSQL 16.15 en Docker (contenedor `dba-u3-pg`, con la base `comercial`)
-- Fecha: 29 de octubre de 2026
+- Fechas: 29 y 31 de octubre de 2026
 
 Este README explica cómo se desplegó el servidor y qué versión tiene, como pide la sección 27 de la guía, y relaciona cada actividad con su script y su evidencia. Las evidencias están en `evidencias/`, en Markdown, con el comando, el resultado y su interpretación.
 
@@ -21,6 +21,10 @@ Este README explica cómo se desplegó el servidor y qué versión tiene, como p
 | 9. Sesiones activas con `pg_stat_activity` | — | [09-pg-stat-activity.md](evidencias/09-pg-stat-activity.md) |
 | 10. Diseño del registro de auditoría | [04-esquema-auditoria.sql](sql/04-esquema-auditoria.sql) | [10-diseno-auditoria.md](evidencias/10-diseno-auditoria.md) |
 | 11. Función y disparador de auditoría | [05-funcion-disparador.sql](sql/05-funcion-disparador.sql) | [10-diseno-auditoria.md](evidencias/10-diseno-auditoria.md), segunda parte |
+| 12. El incidente auditado | [06-campos-modificados.sql](sql/06-campos-modificados.sql) | [11-incidente-auditado.md](evidencias/11-incidente-auditado.md) |
+| 13. Altas y bajas | — | [12-altas-bajas.md](evidencias/12-altas-bajas.md) |
+| 14. Intentar manipular la auditoría | — | [13-manipulacion.md](evidencias/13-manipulacion.md) |
+| 15. Límites: lecturas y volumen | — | [14-limites.md](evidencias/14-limites.md) |
 
 ## Objetivo
 
@@ -56,7 +60,7 @@ No se usó `dba-practica`, el servidor de la Unidad II. El LAB-04 ya le había a
 | Sesión | Cómo se abre |
 | --- | --- |
 | Administrador | `docker exec -it dba-u3-pg psql -U postgres -d comercial -P pager=off`, por el socket local. `-P pager=off` evita que una salida ancha abra el paginador. |
-| Por red | `docker exec -it dba-u3-pg psql "postgresql://<usuario>@127.0.0.1/comercial?application_name=<aplicacion>"`. `psql` pide la contraseña, así que no queda escrita en el comando. |
+| Por red | `docker exec -it dba-u3-pg psql -W "postgresql://<usuario>@127.0.0.1/comercial?application_name=<aplicacion>"`. `-W` hace que `psql` pida la contraseña antes de conectarse, así que no queda escrita en el comando. |
 
 ### Autenticación (sección 6.4)
 
