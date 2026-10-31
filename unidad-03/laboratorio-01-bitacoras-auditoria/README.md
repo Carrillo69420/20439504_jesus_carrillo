@@ -6,7 +6,7 @@
 - Entorno: PostgreSQL 16.15 en Docker (contenedor `dba-u3-pg`, con la base `comercial`)
 - Fechas: 29 y 31 de octubre de 2026
 
-Este README explica cómo se desplegó el servidor y qué versión tiene, como pide la sección 27 de la guía, y relaciona cada actividad con su script y su evidencia. Las evidencias están en `evidencias/`, en Markdown, con el comando, el resultado y su interpretación.
+Este README explica cómo se desplegó el servidor y qué versión tiene, como pide la sección 27 de la guía, y relaciona cada actividad con su script y su evidencia. Las evidencias están en `evidencias/`, en Markdown, con el comando, el resultado y su interpretación. El informe, la verificación final y la reflexión están en [informe.md](informe.md).
 
 | Actividad | Script | Evidencia |
 | --- | --- | --- |
