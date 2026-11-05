@@ -1,0 +1,4 @@
+evidencias/system-profile-actividad3.json -text
+evidencias/system-profile.json -text
+evidencias/bitacora-mongod.log -text
+evidencias/hashes.sha256 -text

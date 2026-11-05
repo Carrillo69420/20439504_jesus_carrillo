@@ -1,0 +1,123 @@
+[
+  {
+    "op": "query",
+    "ns": "comercial.clientes",
+    "command": {
+      "find": "clientes",
+      "filter": {
+        "ciudad": "Culiacán"
+      },
+      "projection": {
+        "nombre": 1,
+        "ciudad": 1
+      },
+      "lsid": {
+        "id": {
+          "$binary": {
+            "base64": "u98NbeSPSxOvLIaT0dmXWA==",
+            "subType": "04"
+          }
+        }
+      },
+      "$db": "comercial"
+    },
+    "docsExamined": 5,
+    "nreturned": 3,
+    "millis": 0,
+    "ts": {
+      "$date": "2026-11-05T17:52:12.538Z"
+    },
+    "client": "127.0.0.1",
+    "appName": "app-ventas-web",
+    "user": "app_ventas@comercial"
+  },
+  {
+    "op": "update",
+    "ns": "comercial.clientes",
+    "command": {
+      "q": {
+        "_id": 3
+      },
+      "u": {
+        "$set": {
+          "rfc": "GAMA780912XYZ"
+        }
+      },
+      "multi": false,
+      "upsert": false
+    },
+    "docsExamined": 1,
+    "nModified": 1,
+    "millis": 0,
+    "ts": {
+      "$date": "2026-11-05T17:52:12.541Z"
+    },
+    "client": "127.0.0.1",
+    "appName": "app-ventas-web",
+    "user": "app_ventas@comercial"
+  },
+  {
+    "op": "remove",
+    "ns": "comercial.clientes",
+    "command": {
+      "q": {
+        "_id": 2
+      },
+      "limit": 1
+    },
+    "docsExamined": 1,
+    "ndeleted": 1,
+    "millis": 0,
+    "ts": {
+      "$date": "2026-11-05T17:52:12.545Z"
+    },
+    "client": "127.0.0.1",
+    "appName": "app-ventas-web",
+    "user": "app_ventas@comercial"
+  },
+  {
+    "op": "query",
+    "ns": "comercial.system.profile",
+    "command": {
+      "find": "system.profile",
+      "filter": {
+        "ns": "comercial.clientes"
+      },
+      "sort": {
+        "ts": 1
+      },
+      "projection": {
+        "op": 1,
+        "ns": 1,
+        "command": 1,
+        "user": 1,
+        "client": 1,
+        "appName": 1,
+        "ts": 1,
+        "millis": 1,
+        "nreturned": 1,
+        "docsExamined": 1,
+        "nModified": 1,
+        "ndeleted": 1
+      },
+      "lsid": {
+        "id": {
+          "$binary": {
+            "base64": "VQy8SW41RZicVHY8rR3QZQ==",
+            "subType": "04"
+          }
+        }
+      },
+      "$db": "comercial"
+    },
+    "docsExamined": 3,
+    "nreturned": 3,
+    "millis": 0,
+    "ts": {
+      "$date": "2026-11-05T17:52:19.276Z"
+    },
+    "client": "127.0.0.1",
+    "appName": "mongosh 2.14.0",
+    "user": "admin@admin"
+  }
+]

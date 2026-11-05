@@ -13,6 +13,7 @@ Este README explica cómo se desplegó el servidor y qué versión tiene, como p
 | 1. Lo que no existe en esta edición | [01-edicion-y-limitacion.md](evidencias/01-edicion-y-limitacion.md) |
 | 2. El incidente sin perfilado | [02-incidente-sin-perfilado.md](evidencias/02-incidente-sin-perfilado.md) |
 | 3. Activar el perfilador y registrar operaciones | [03-perfilador.md](evidencias/03-perfilador.md) |
+| 4. Reducir el volumen con un filtro | [04-filtro.md](evidencias/04-filtro.md) y el archivo exportado [system-profile-actividad3.json](evidencias/system-profile-actividad3.json) |
 
 ## Objetivo
 
