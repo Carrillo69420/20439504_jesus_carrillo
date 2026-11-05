@@ -15,6 +15,7 @@ Este README explica cómo se desplegó el servidor y qué versión tiene, como p
 | 3. Activar el perfilador y registrar operaciones | [03-perfilador.md](evidencias/03-perfilador.md) |
 | 4. Reducir el volumen con un filtro | [04-filtro.md](evidencias/04-filtro.md) y el archivo exportado [system-profile-actividad3.json](evidencias/system-profile-actividad3.json) |
 | 5. Accesos en la bitácora de `mongod` | [05-accesos-mongod.md](evidencias/05-accesos-mongod.md) |
+| 6. Correlacionar un cambio de configuración con su autor | [06-correlacion.md](evidencias/06-correlacion.md) |
 
 ## Objetivo
 
