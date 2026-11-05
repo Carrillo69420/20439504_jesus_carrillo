@@ -11,6 +11,7 @@ Este README explica cómo se desplegó el servidor y qué versión tiene, como p
 | Actividad | Evidencia |
 | --- | --- |
 | 1. Lo que no existe en esta edición | [01-edicion-y-limitacion.md](evidencias/01-edicion-y-limitacion.md) |
+| 2. El incidente sin perfilado | [02-incidente-sin-perfilado.md](evidencias/02-incidente-sin-perfilado.md) |
 
 ## Objetivo
 
