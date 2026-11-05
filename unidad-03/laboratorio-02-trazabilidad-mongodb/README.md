@@ -17,6 +17,7 @@ Este README explica cómo se desplegó el servidor y qué versión tiene, como p
 | 5. Accesos en la bitácora de `mongod` | [05-accesos-mongod.md](evidencias/05-accesos-mongod.md) |
 | 6. Correlacionar un cambio de configuración con su autor | [06-correlacion.md](evidencias/06-correlacion.md) |
 | 7. Cambios de privilegios: el límite más importante | [07-privilegios-control-compensatorio.md](evidencias/07-privilegios-control-compensatorio.md) |
+| 8. Conservación: exportar antes de perder | [08-conservacion.md](evidencias/08-conservacion.md) y los archivos exportados [system-profile.json](evidencias/system-profile.json), [bitacora-mongod.log](evidencias/bitacora-mongod.log) y [hashes.sha256](evidencias/hashes.sha256) |
 
 ## Objetivo
 
