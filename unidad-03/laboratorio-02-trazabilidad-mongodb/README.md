@@ -19,6 +19,7 @@ Este README explica cómo se desplegó el servidor y qué versión tiene, como p
 | 7. Cambios de privilegios: el límite más importante | [07-privilegios-control-compensatorio.md](evidencias/07-privilegios-control-compensatorio.md) |
 | 8. Conservación: exportar antes de perder | [08-conservacion.md](evidencias/08-conservacion.md) y los archivos exportados [system-profile.json](evidencias/system-profile.json), [bitacora-mongod.log](evidencias/bitacora-mongod.log) y [hashes.sha256](evidencias/hashes.sha256) |
 | 9. Comparar los tres escenarios | [09-comparacion.md](evidencias/09-comparacion.md) |
+| 10. Responder a Dirección | [10-respuesta-direccion.md](evidencias/10-respuesta-direccion.md) |
 
 ## Objetivo
 
