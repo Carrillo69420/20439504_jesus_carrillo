@@ -15,6 +15,7 @@ Este README relaciona cada actividad con su evidencia. Las evidencias están en 
 | 3. Diccionario de datos operativo dentro del motor | [03-diccionario.md](evidencias/03-diccionario.md), el script [02-comentarios-diccionario.sql](sql/02-comentarios-diccionario.sql) y el archivo exportado [diccionario-clientes.csv](evidencias/diccionario-clientes.csv) |
 | 4. Catálogo mínimo de datos | [04-catalogo.md](evidencias/04-catalogo.md) y el script [03-inventario-tablas.sql](sql/03-inventario-tablas.sql) |
 | 5. Criterio de conservación de bitácoras | [05-conservacion.md](evidencias/05-conservacion.md) |
+| 6. Políticas prácticas de datos | [POL-01 Acceso](politicas/POL-01-acceso.md), [POL-02 Respaldo](politicas/POL-02-respaldo.md), [POL-03 Retención](politicas/POL-03-retencion.md), [POL-04 Restauración](politicas/POL-04-restauracion.md), [POL-05 Uso de datos sensibles](politicas/POL-05-datos-sensibles.md) y [POL-06 Cambios en producción](politicas/POL-06-cambios-produccion.md) |
 
 ## Objetivo
 
