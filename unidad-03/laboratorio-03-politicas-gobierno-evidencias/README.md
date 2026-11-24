@@ -14,6 +14,7 @@ Este README relaciona cada actividad con su evidencia. Las evidencias están en 
 | 2. Propietarios, custodios y usuarios | [02-responsables.md](evidencias/02-responsables.md) |
 | 3. Diccionario de datos operativo dentro del motor | [03-diccionario.md](evidencias/03-diccionario.md), el script [02-comentarios-diccionario.sql](sql/02-comentarios-diccionario.sql) y el archivo exportado [diccionario-clientes.csv](evidencias/diccionario-clientes.csv) |
 | 4. Catálogo mínimo de datos | [04-catalogo.md](evidencias/04-catalogo.md) y el script [03-inventario-tablas.sql](sql/03-inventario-tablas.sql) |
+| 5. Criterio de conservación de bitácoras | [05-conservacion.md](evidencias/05-conservacion.md) |
 
 ## Objetivo
 
