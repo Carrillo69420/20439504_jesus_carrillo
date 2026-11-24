@@ -11,6 +11,7 @@ Este README relaciona cada actividad con su evidencia. Las evidencias están en 
 | Actividad | Evidencia |
 | --- | --- |
 | 1. Calidad de datos desde la operación | [01-calidad.md](evidencias/01-calidad.md) y el script [01-verificaciones-calidad.sql](sql/01-verificaciones-calidad.sql) |
+| 2. Propietarios, custodios y usuarios | [02-responsables.md](evidencias/02-responsables.md) |
 
 ## Objetivo
 
