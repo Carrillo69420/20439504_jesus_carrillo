@@ -12,6 +12,7 @@ Este README relaciona cada actividad con su evidencia. Las evidencias están en 
 | --- | --- |
 | 1. Calidad de datos desde la operación | [01-calidad.md](evidencias/01-calidad.md) y el script [01-verificaciones-calidad.sql](sql/01-verificaciones-calidad.sql) |
 | 2. Propietarios, custodios y usuarios | [02-responsables.md](evidencias/02-responsables.md) |
+| 3. Diccionario de datos operativo dentro del motor | [03-diccionario.md](evidencias/03-diccionario.md), el script [02-comentarios-diccionario.sql](sql/02-comentarios-diccionario.sql) y el archivo exportado [diccionario-clientes.csv](evidencias/diccionario-clientes.csv) |
 
 ## Objetivo
 
