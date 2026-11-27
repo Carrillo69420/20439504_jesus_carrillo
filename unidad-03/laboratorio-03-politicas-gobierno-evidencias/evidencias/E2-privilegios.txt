@@ -1,0 +1,6 @@
+   grantee   | table_schema | table_name |  privilegios   
+-------------+--------------+------------+----------------
+ app_ventas  | public       | clientes   | SELECT, UPDATE
+ soporte_ana | public       | clientes   | SELECT
+(2 rows)
+

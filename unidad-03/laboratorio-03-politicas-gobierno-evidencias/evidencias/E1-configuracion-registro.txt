@@ -1,0 +1,10 @@
+          name           |                 setting                 |       source       
+-------------------------+-----------------------------------------+--------------------
+ log_connections         | on                                      | configuration file
+ log_disconnections      | on                                      | configuration file
+ logging_collector       | on                                      | configuration file
+ log_line_prefix         | %m [%p] user=%u db=%d app=%a client=%h  | configuration file
+ log_min_error_statement | error                                   | default
+ log_statement           | mod                                     | configuration file
+(6 rows)
+
