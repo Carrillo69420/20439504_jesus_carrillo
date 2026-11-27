@@ -24,7 +24,7 @@
 
 ## 3. Bitácora interpretada
 
-Las líneas son de [E5](evidencias/E5-bitacora-postgresql.log), con el formato de la cronología del LAB-01 ([evidencia 15](../laboratorio-01-bitacoras-auditoria/evidencias/15-cronologia.md)). Hasta la línea 252 coinciden con la bitácora exportada del LAB-01.
+Las líneas son de [E5](evidencias/E5-bitacora-postgresql.log), con el formato de la cronología del LAB-01 ([evidencia 15](../laboratorio-01-bitacoras-auditoria/evidencias/15-cronologia.md)). Hasta la línea 241, donde termina la bitácora exportada del LAB-01, E5 es idéntica a esa exportación línea por línea (se comparó con `diff`): esas líneas no cambiaron en el servidor desde el LAB-01.
 
 | # | Cuándo | Quién | Desde dónde | Qué ocurrió | Tipo de evento | Qué prueba | Fuente |
 | --- | --- | --- | --- | --- | --- | --- | --- |

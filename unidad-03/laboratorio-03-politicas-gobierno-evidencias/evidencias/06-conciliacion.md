@@ -107,8 +107,8 @@ De 27 sentencias, solo una tiene folio. Las demás son de los LAB-01 y LAB-03 y 
 
 ### 4. Lo que la conciliación no puede ver
 
-- **La vista `dba.bitacora`**: no aparece su creación, porque en la Actividad 2 del LAB-01 `log_statement` valía `none`. Es un hueco de evidencia.
-- **El hueco del 29/10 de 11:39:36 a 11:51:02**, con `log_statement` en `ddl`.
+- **El arranque del 29/10**: hasta las 10:53:23, `log_statement` valía `none` y no se registró ninguna sentencia. Por eso no aparece la creación de la vista `dba.bitacora` (Actividad 2 del LAB-01): es un hueco de evidencia. Hasta las 11:33:38 valió `ddl`, que no registra modificaciones de datos.
+- **El hueco del 29/10 de 11:39:36 a 11:51:02**, otra vez con `log_statement` en `ddl`.
 - **Los `COMMENT ON` de la A3 de este laboratorio**: están en E5 (archivo del 24/11), pero el filtro de la guía no los incluye. Son documentación, no cambian datos ni permisos.
 - **Lo que haga un superusuario con `SET log_statement = 'none'` en su sesión**, que no deja rastro ([LAB-01, evidencia 10](../../laboratorio-01-bitacoras-auditoria/evidencias/10-diseno-auditoria.md)).
 

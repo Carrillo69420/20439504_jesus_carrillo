@@ -4,7 +4,7 @@
 - Materia: Gestión de Seguridad y Desempeño de Bases de Datos
 - Unidad III, evidencia oficial de la unidad: «Configuración o diseño de auditoría con bitácora interpretada»
 - Entorno: PostgreSQL 16.15 en Docker (contenedor `dba-u3-pg`, el del LAB-01, con la base `comercial`) y los archivos exportados del LAB-02 (MongoDB 7.0.45)
-- Fecha: 24 de noviembre de 2026
+- Fechas: 24 y 26 de noviembre de 2026
 
 Este README relaciona cada actividad con su evidencia. Las evidencias están en `evidencias/`, en Markdown, con el comando, el resultado y su interpretación, y los scripts, en `sql/`.
 
