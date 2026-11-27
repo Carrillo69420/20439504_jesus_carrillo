@@ -1,0 +1,6 @@
+evidencias/E5-bitacora-postgresql.log -text
+evidencias/E5-bitacora-postgresql.sha256 -text
+evidencias/E6-mongodb/system-profile-actividad3.json -text
+evidencias/E6-mongodb/system-profile.json -text
+evidencias/E6-mongodb/bitacora-mongod.log -text
+evidencias/E6-mongodb/hashes.sha256 -text

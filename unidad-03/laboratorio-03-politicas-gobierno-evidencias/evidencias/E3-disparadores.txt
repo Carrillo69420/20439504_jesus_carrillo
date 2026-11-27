@@ -1,0 +1,5 @@
+         tgname         | tgenabled | tgrelid  
+------------------------+-----------+----------
+ trg_auditoria_clientes | O         | clientes
+(1 row)
+
